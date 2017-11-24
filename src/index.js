@@ -26,11 +26,11 @@ class JsPager {
   activatePager() {
     this.pager = null;
     this.pager = new Paginate(this.data, this.perPage);
-    
+
     this.itemList = this.pager.page(0);
-    
+
     // for dropdown
-    this.setTotalPages(this.pager.totalPages);
+    this.setTotalPages();
 
     this.addEvents();
     this.refresh();
@@ -47,8 +47,35 @@ class JsPager {
     });
   }
 
-  setTotalPages(totalPages) {
-    console.log(totalPages);
+  setTotalPages() {
+    let select = document.getElementById(this.pageSelector);
+    select.innerHTML = "";
+
+    let optsArr = [];
+    for (let i = 1, l = this.pager.totalPages + 1; i < l; i++) {
+      optsArr.push({
+        value: i,
+        selected: false
+      });
+    }
+    optsArr[this.pager.currentPage - 1].selected = true;
+
+    for (let i = 0, l = optsArr.length; i < l; i++) {
+      let el = document.createElement("option");
+      el.textContent = optsArr[i].value;
+      el.value = optsArr[i].value;
+      el.selected = optsArr[i].selected;
+      select.appendChild(el);
+    }
+
+    select.addEventListener("change", (e) => {
+      this.showPage(e.target.value);
+    }, false);
+  }
+
+  showPage(num) {
+    this.itemList = this.pager.page(num);
+    this.refresh();
   }
 
   prev() {
@@ -73,8 +100,8 @@ class JsPager {
     document.getElementById(this.itemHolder).innerHTML = this.itemList;
     document.getElementById(this.currentPageHolder).innerHTML = this.pager.currentPage;
     document.getElementById(this.totalPageHolder).textContent = this.pager.totalPages;
+    this.setTotalPages();
   }
-
 }
 
 let zz = new JsPager({

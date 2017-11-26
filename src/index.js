@@ -20,6 +20,9 @@ class JsPager {
     this.btn_prev = opts.btn_prev;
     this.btn_next = opts.btn_next;
     this.pageSelector = opts.pageSelector;
+
+    this.perPageItems = [10, 20, 40, 60, 100];
+    this.perPageSelector = opts.perPageSelector;
   }
 
   // prototypes
@@ -31,6 +34,9 @@ class JsPager {
 
     // for dropdown
     this.setTotalPages();
+
+    // for perPageItems
+    this.setPerPages();
 
     this.addEvents();
     this.refresh();
@@ -73,6 +79,15 @@ class JsPager {
     }, false);
   }
 
+  setPerPages() {
+    let select = document.getElementById(this.perPageSelector);
+    select.innerHTML = "";
+  }
+
+  setPerPage(num) {
+    this.perPage = num;
+  }
+
   showPage(num) {
     this.itemList = this.pager.page(num);
     this.refresh();
@@ -112,7 +127,8 @@ let zz = new JsPager({
   totalPageHolder: "jspager_totalpages",
   btn_prev: "jspager_prev",
   btn_next: "jspager_next",
-  pageSelector: "jspager_select"
+  pageSelector: "jspager_select",
+  perPageSelector: "jspager_perpage"
 });
 
 zz.activatePager();

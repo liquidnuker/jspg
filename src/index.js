@@ -17,10 +17,14 @@ class JsPager {
     this.itemHolder = opts.itemHolder;
     this.currentPageHolder = opts.currentPageHolder;
     this.totalPageHolder = opts.totalPageHolder;
+    
     this.btn_prev = opts.btn_prev;
     this.btn_next = opts.btn_next;
-    this.pageSelector = opts.pageSelector;
+    
+    this.pageJumpInput = opts.pageJumpInput;
+    this.pageJumpBtn = opts.pageJumpBtn;
 
+    this.pageSelector = opts.pageSelector;
     this.perPageItems = [10, 20, 40, 60, 100];
     this.perPageSelector = opts.perPageSelector;
   }
@@ -29,7 +33,9 @@ class JsPager {
   init() {
     this.pageSelect = document.getElementById(this.pageSelector);
     this.perPageSelect = document.getElementById(this.perPageSelector);
-    
+    this.jumpInput = document.getElementById(this.pageJumpInput);
+    this.jumpBtn = document.getElementById(this.pageJumpBtn);
+
     this.activatePager();
     this.addEvents();
   }
@@ -59,8 +65,16 @@ class JsPager {
       this.setPerPage(e.target.value);
     }, false);
 
+    this.jumpInput.addEventListener("keypress", (e) => {
+      // todo
+    }, false);
+
     this.setPageSelectorDropdown();
     this.setPerPageDropdown();
+  }
+
+  handleJumpInput() {
+    
   }
 
   setPageSelectorDropdown() {
@@ -143,7 +157,9 @@ let zz = new JsPager({
   btn_prev: "jspager_prev",
   btn_next: "jspager_next",
   pageSelector: "jspager_select",
-  perPageSelector: "jspager_perpage"
+  perPageSelector: "jspager_perpage",
+  pageJumpInput: "jspager_jump",
+  pageJumpBtn: "jspager_jumpbtn"
 });
 
 zz.init();

@@ -66,15 +66,19 @@ class JsPager {
     }, false);
 
     this.jumpInput.addEventListener("keypress", (e) => {
-      // todo
+      if (e.keyCode === 32 || e.keyCode === 13) {
+        this.showPage(e.target.value);
+      }
     }, false);
+
+    this.jumpBtn.addEventListener("click", (e) => {
+      this.showPage(this.jumpInput.value);
+    }, false);
+
+
 
     this.setPageSelectorDropdown();
     this.setPerPageDropdown();
-  }
-
-  handleJumpInput() {
-    
   }
 
   setPageSelectorDropdown() {

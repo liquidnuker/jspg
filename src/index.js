@@ -5,7 +5,7 @@ import Paginate from "./js/vendor/Paginate.js";
 // temp item data
 let items = [];
 let num = 0;
-for (let i = 0, l = 32; i < l; i++) {
+for (let i = 0, l = 42; i < l; i++) {
   num += 1;
   items.push(num);
 }
@@ -26,21 +26,20 @@ class JsPager {
   }
 
   // prototypes
+  init() {
+    this.pageSelect = document.getElementById(this.pageSelector);
+    this.perPageSelect = document.getElementById(this.perPageSelector);
+    
+    this.activatePager();
+    this.addEvents();
+  }
+
   activatePager() {
     this.pager = null;
     this.pager = new Paginate(this.data, this.perPage);
-
     this.itemList = this.pager.page(0);
 
-    // for dropdown
-    this.setTotalPages();
-
-    // for perPageItems
-    this.setPerPages();
-
-    this.addEvents();
     this.refresh();
-
   }
 
   addEvents() {
@@ -51,11 +50,23 @@ class JsPager {
     document.getElementById(this.btn_next).addEventListener("click", () => {
       this.next();
     });
+
+    this.pageSelect.addEventListener("change", (e) => {
+      this.showPage(e.target.value);
+    }, false);
+
+    this.perPageSelect.addEventListener("change", (e) => {
+      this.setPerPage(e.target.value);
+    }, false);
+
+    this.setPageSelectorDropdown();
+    this.setPerPageDropdown();
   }
 
-  setTotalPages() {
-    let select = document.getElementById(this.pageSelector);
-    select.innerHTML = "";
+  setPageSelectorDropdown() {
+    // for page selector
+    let pageSelect = this.pageSelect;
+    pageSelect.innerHTML = "";
 
     let optsArr = [];
     for (let i = 1, l = this.pager.totalPages + 1; i < l; i++) {
@@ -71,21 +82,25 @@ class JsPager {
       el.textContent = optsArr[i].value;
       el.value = optsArr[i].value;
       el.selected = optsArr[i].selected;
-      select.appendChild(el);
+      pageSelect.appendChild(el);
     }
-
-    select.addEventListener("change", (e) => {
-      this.showPage(e.target.value);
-    }, false);
   }
 
-  setPerPages() {
-    let select = document.getElementById(this.perPageSelector);
-    select.innerHTML = "";
+  setPerPageDropdown() {
+    // for perPage items
+    let perPageSelect = this.perPageSelect;
+    perPageSelect.innerHTML = "";
+    for (let i = 0, l = this.perPageItems.length; i < l; i++) {
+      let el2 = document.createElement("option");
+      el2.textContent = this.perPageItems[i];
+      el2.value = this.perPageItems[i];
+      perPageSelect.appendChild(el2);
+    }
   }
 
   setPerPage(num) {
     this.perPage = num;
+    this.activatePager();
   }
 
   showPage(num) {
@@ -113,9 +128,9 @@ class JsPager {
 
   refresh() {
     document.getElementById(this.itemHolder).innerHTML = this.itemList;
-    document.getElementById(this.currentPageHolder).innerHTML = this.pager.currentPage;
+    document.getElementById(this.currentPageHolder).textContent = this.pager.currentPage;
     document.getElementById(this.totalPageHolder).textContent = this.pager.totalPages;
-    this.setTotalPages();
+    this.setPageSelectorDropdown();
   }
 }
 
@@ -131,4 +146,4 @@ let zz = new JsPager({
   perPageSelector: "jspager_perpage"
 });
 
-zz.activatePager();
+zz.init();

@@ -60,7 +60,6 @@ Paginate.prototype.page = function (pageNum) {
  */
  
 Paginate.prototype.next = function () {
-
 	return this.page(this.currentPage + 1);
 }
 

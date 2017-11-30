@@ -17,7 +17,7 @@ class JsPager {
     this.itemHolder = opts.itemHolder;
     this.currentPageHolder = opts.currentPageHolder;
     this.totalPageHolder = opts.totalPageHolder;
-    
+
     this.btn_prev = opts.btn_prev;
     this.btn_next = opts.btn_next;
     
@@ -44,7 +44,8 @@ class JsPager {
     this.pager = null;
     this.pager = new Paginate(this.data, this.perPage);
     this.itemList = this.pager.page(0);
-
+    this.currentPage = this.pager.currentPage;
+    console.log(this.currentPage);
     this.refresh();
   }
 
@@ -75,14 +76,13 @@ class JsPager {
       this.showPage(this.jumpInput.value);
     }, false);
 
-
-
-    this.setPageSelectorDropdown();
+    this.setPageSelectorDropdown(this.currentPage);
     this.setPerPageDropdown();
   }
 
-  setPageSelectorDropdown() {
-    // for page selector
+  setPageSelectorDropdown(index) {
+    console.log("pageselector" + " " +index);
+    
     let pageSelect = this.pageSelect;
     pageSelect.innerHTML = "";
 
@@ -93,7 +93,12 @@ class JsPager {
         selected: false
       });
     }
-    optsArr[this.pager.currentPage - 1].selected = true;
+
+    if (optsArr[index] === undefined) {
+      console.log("Undefined:::" + " " + "currentPage" + " " + index);
+    }
+
+    optsArr[index - 1].selected = true;
 
     for (let i = 0, l = optsArr.length; i < l; i++) {
       let el = document.createElement("option");
@@ -118,37 +123,56 @@ class JsPager {
 
   setPerPage(num) {
     this.perPage = num;
+    this.currentPage = num;
     this.activatePager();
   }
 
   showPage(num) {
     this.itemList = this.pager.page(num);
+    this.currentPage = num;
+    console.log(this.currentPage);
     this.refresh();
   }
 
   prev() {
-    if (this.pager.currentPage === 1) {
+    if (this.pager.currentPage == 1) {
       this.itemList = this.pager.page(this.pager.totalPages);
-    } else {
+      this.currentPage = this.pager.currentPage;
+      } else {
       this.itemList = this.pager.prev();
+      this.currentPage = this.pager.currentPage;
     }
     this.refresh();
   }
 
   next() {
+    // console.log(this.currentPage);
+    
     if (!this.pager.hasNext()) {
-      this.itemList = this.pager.page(0);
-    } else {
-      this.itemList = this.pager.next();
-    }
-    this.refresh();
+        // this.itemList = this.pager.page(0);
+        console.log(this.currentPage);
+        console.log("no next");
+        this.showPage(1);
+      } else {
+        this.itemList = this.pager.next();
+        // this.showPage(this.currentPage + 1);
+        this.refresh();
+
+        console.log("has next");
+      }
+    // this.currentPage = this.pager.currentPage;
+
+    // this.itemList = this.pager.next();
+
+    // this.refresh();
   }
 
   refresh() {
     document.getElementById(this.itemHolder).innerHTML = this.itemList;
-    document.getElementById(this.currentPageHolder).textContent = this.pager.currentPage;
+    document.getElementById(this.currentPageHolder).textContent = this.currentPage;
     document.getElementById(this.totalPageHolder).textContent = this.pager.totalPages;
-    this.setPageSelectorDropdown();
+    this.currentPage = this.pager.currentPage;
+    this.setPageSelectorDropdown(this.currentPage);
   }
 }
 

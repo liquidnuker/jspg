@@ -1,0 +1,48 @@
+.jspager {
+  .jspager_controls {
+    @extend %margin-top--4;
+    background-color: #ccc;
+
+    p {
+      @extend %display--inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  .btn {
+    height: 30px;
+    vertical-align: middle;
+  }
+
+  .btn_prev,
+  .btn_next {
+    svg {
+      @extend %display--inline-block;
+      vertical-align: text-bottom;
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .btn_prev {
+    svg {
+      margin-left: -4px;
+    }
+  }
+
+  .btn_next {
+    svg {
+      margin-right: -4px;
+    }
+  }
+
+  .jspager_select,
+  .jspager_perpage,
+  .jspager_jump {
+    @extend %padd--4;
+    vertical-align: middle;
+    height: 30px;
+    border: 1px solid #000;
+    background-color: #fff;
+  }
+}

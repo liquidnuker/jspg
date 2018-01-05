@@ -12,19 +12,35 @@
     <link rel="icon" type="image/png" href="icon.png">
   </head>
   <body>
-    <div id="jspager_items"></div>
-    <button id="jspager_prev">&lt;Previous</button>
-    Page: <span id="jspager_currentpage"></span>
-    <select id="jspager_select">
-      
-    </select>
-    of: <span id="jspager_totalpages"></span>
-    <button id="jspager_next">Next&gt;</button>
-    perPage: <select id="jspager_perpage">      
-    </select>
-    jump to page:
-    <input type="text" name="" id="jspager_jump" placeholder="" />
-    <button id="jspager_jumpbtn">go</button>
+    <div class="jspager">
+      <div id="jspager_items"></div>
+      <div class="jspager_controls">
+        <button id="jspager_prev" class="btn btn1-01 btn_prev">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+        </svg>
+        Prev
+        </button>
+        <p>Page:</p>
+        <p id="jspager_currentpage"></p>
+        <select id="jspager_select" class="jspager_select">
+          
+        </select>
+        <p>of:&nbsp;</p><p id="jspager_totalpages"></p>
+        <button id="jspager_next" class="btn btn1-01 btn_next">
+        Next
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+        </svg>
+        </button>
+        <p>perPage:&nbsp;</p>
+        <select id="jspager_perpage" class="jspager_perpage">
+        </select>
+        <p>jump to page:&nbsp;</p>
+        <input type="text" name="" id="jspager_jump" class="jspager_jump" placeholder="" />
+        <button id="jspager_jumpbtn" class="btn btn1-01">Go</button>
+      </div>
+    </div>
     <script src="dist/main.bundle.js"></script>
   </body>
 </html>

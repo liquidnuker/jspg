@@ -31,24 +31,24 @@ function JsPager(opts) {
 JsPager.prototype = {
   init: function () {
     this.activatePager(this.perPage);
-    this.showItems(1);
-    this.setPageSelectorDropdown();
+    this.showItems(this.pg.currentPage);
     this.setPerPageDropdown();
     this.addEvents();
   },
-  activatePager: function(perPage) {
+  activatePager: function () {
+    this.pg = null;
     this.pg = new Pager({
-      perPage: perPage,
+      perPage: this.perPage,
       data: items
     });
   },
-  addEvents: function() {
+  addEvents: function () {
     document.getElementById(this.btn_prev).addEventListener("click", () => {
       this.flip();
     });
 
     document.getElementById(this.btn_next).addEventListener("click", () => {
-      this.flip("next")
+      this.flip("next");
     });
 
     document.getElementById(this.pageSelector).addEventListener("change", (event) => {
@@ -56,23 +56,31 @@ JsPager.prototype = {
     });
 
     document.getElementById(this.perPageSelector).addEventListener("click", (event) => {
-      
+
     });
 
     document.getElementById(this.pageJumpBtn).addEventListener("click", () => {
       this.pageJump();
+    });
+
+    document.getElementById(this.pageJumper).addEventListener("keypress", (e) => {
+      if (e.keyCode === 32 || e.keyCode === 13) {
+        this.pageJump();
+      }
     });
   },
   showItems(num) {
     let itemHolder = document.getElementById(this.itemHolder);
     itemHolder.innerHTML = "";
 
-    this.pg.page(num).forEach(function (i, index, array) {
+    this.pg.page(num).forEach(function (i) {
       let el2 = document.createElement("div");
       el2.textContent = i;
       el2.value = i;
       itemHolder.appendChild(el2);
     });
+
+    this.setPageSelectorDropdown(this.pg.currentPage);
   },
   flip(direction) {
     if (direction === "next") {
@@ -85,13 +93,25 @@ JsPager.prototype = {
     let page = document.getElementById(this.pageJumper).value;
     this.showItems(page);
   },
-  setPageSelectorDropdown() {
+  setPageSelectorDropdown(page) {
     let pageSelector = document.getElementById(this.pageSelector);
     pageSelector.innerHTML = "";
+
+    let optsArr = [];
+    for (let i = 0, l = this.pg.getTotalPages() + 1; i < l; i++) {
+      optsArr.push({
+        value: i,
+        selected: false
+      });
+    }
+
+    optsArr[page].selected = true;
+
     for (let i = 1, l = this.pg.getTotalPages() + 1; i < l; i++) {
       let el2 = document.createElement("option");
-      el2.textContent = i;
-      el2.value = i;
+      el2.textContent = optsArr[i].value;
+      el2.value = optsArr[i].value;
+      el2.selected = optsArr[i].selected;
       pageSelector.appendChild(el2);
     }
   },
@@ -99,7 +119,7 @@ JsPager.prototype = {
     let perPageSelector = document.getElementById(this.perPageSelector);
     perPageSelector.innerHTML = "";
 
-    this.perPageItems.forEach(function(i, index, array) {
+    this.perPageItems.forEach(function (i) {
       let el2 = document.createElement("option");
       el2.textContent = i;
       el2.value = i;

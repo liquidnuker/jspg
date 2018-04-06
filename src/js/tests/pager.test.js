@@ -17,10 +17,11 @@ test('page switcher', () => {
   // ok
   // expect(pg.page(2)).toBe(true); 
   // expect(pg.page(0)).toBe(false); 
-
   expect(pg.page(1)).toEqual(expect.any(Array));
   expect(pg.page(1)).toHaveLength(pg.perPage);
   expect(pg.page(pg.getTotalPages())).toBeTruthy();
+
+  expect(pg.currentPage).toBeLessThanOrEqual(pg.getTotalPages());
 });
 
 test('page switcher should default on invalid page', () => {

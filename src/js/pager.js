@@ -8,36 +8,36 @@ export default function Pager(opts) {
 }
 
 Pager.prototype = {
-  getTotalPages: function() {
+  getTotalPages: function () {
     // ret num
     return Math.ceil(this.data.length / this.perPage);
   },
-  getCurrentOffset: function() {
+  getCurrentOffset: function () {
     // ret num
-    return (this.currentPage - 1) * this.perPage; 
+    return (this.currentPage - 1) * this.perPage;
   },
-  page: function(num) {
+  page: function (num) {
     if (this.isValidPage(num)) {
       this.currentPage = num;
 
       let start = this.getCurrentOffset();
       let end = start + this.perPage;
-      return this.data.slice(start, end);      
+      return this.data.slice(start, end);
     } else {
       // default page
       this.currentPage = 1;
-      return this.data.slice(0, this.perPage);      
+      return this.data.slice(0, this.perPage);
     }
   },
-  hasNext: function() {
+  hasNext: function () {
     // ret boolean
     return this.currentPage < this.getTotalPages();
   },
-  hasPrev: function() {
+  hasPrev: function () {
     // ret boolean
     return this.currentPage !== 1;
   },
-  prev: function() {
+  prev: function () {
     // ret num
     if (this.hasPrev()) {
       this.currentPage = this.currentPage - 1;
@@ -46,17 +46,17 @@ Pager.prototype = {
     }
     return this.currentPage;
   },
-  next: function() {
+  next: function () {
     // ret num
     if (this.hasNext()) {
-      this.currentPage ++;
+      this.currentPage++;
     } else {
       this.currentPage = 1;
     }
     // console.log(this.currentPage);
     return this.currentPage;
   },
-  isValidPage: function(num) {
+  isValidPage: function (num) {
     // ret boolean
     return num > 0 && num <= this.getTotalPages();
   }

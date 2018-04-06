@@ -46,8 +46,8 @@ Paginate.prototype.page = function (pageNum) {
 	
 	this.currentPage = pageNum
 	
-	var start = this.offset()
-	  , end = start + this.perPage
+	var start = this.offset();
+	var end = start + this.perPage;
 
 	return this.data.slice(start, end);
 }

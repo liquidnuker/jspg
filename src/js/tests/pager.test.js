@@ -20,9 +20,17 @@ test('page switcher', () => {
 
   expect(pg.page(1)).toEqual(expect.any(Array));
   expect(pg.page(1)).toHaveLength(pg.perPage);
-
-  expect(pg.page(0)).toBeFalsy();
   expect(pg.page(pg.getTotalPages())).toBeTruthy();
+});
+
+test('page switcher should default on invalid page', () => {
+  let defaultPage = pg.data.slice(0, pg.perPage); 
+  
+  expect(pg.page(0)).toEqual(defaultPage);
+  expect(pg.page(1)).toEqual(defaultPage);
+  expect(pg.page(9999)).toEqual(defaultPage);
+
+  expect(pg.page(2)).not.toEqual(defaultPage);
 });
 
 test('getCurrentOffset', () => {

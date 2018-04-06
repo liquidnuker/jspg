@@ -24,12 +24,14 @@ Pager.prototype = {
       let end = start + this.perPage;
       return this.data.slice(start, end);      
     } else {
-      return false;
+      // default page
+      this.currentPage = 1;
+      return this.data.slice(0, this.perPage);      
     }
   },
   hasNext: function() {
     // ret boolean
-    return this.currentPage !== this.getTotalPages();
+    return this.currentPage < this.getTotalPages();
   },
   hasPrev: function() {
     // ret boolean
@@ -47,10 +49,11 @@ Pager.prototype = {
   next: function() {
     // ret num
     if (this.hasNext()) {
-      this.currentPage = this.currentPage + 1;
+      this.currentPage ++;
     } else {
       this.currentPage = 1;
     }
+    // console.log(this.currentPage);
     return this.currentPage;
   },
   isValidPage: function(num) {

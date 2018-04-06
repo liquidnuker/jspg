@@ -24,16 +24,44 @@ function JsPager(opts) {
   this.btn_next = opts.btn_next;
 
   this.pg = "";
+  this.perPage = 10;
+  this.perPageItems = [10, 20, 50, 100];
 }
 
 JsPager.prototype = {
   init: function () {
+    this.activatePager(this.perPage);
+    this.showItems(1);
+    this.setPageSelectorDropdown();
+    this.setPerPageDropdown();
+    this.addEvents();
+  },
+  activatePager: function(perPage) {
     this.pg = new Pager({
-      perPage: 10,
+      perPage: perPage,
       data: items
     });
-    this.showItems(2);
-    this.setPageSelectorDropdown();
+  },
+  addEvents: function() {
+    document.getElementById(this.btn_prev).addEventListener("click", () => {
+      this.flip();
+    });
+
+    document.getElementById(this.btn_next).addEventListener("click", () => {
+      this.flip("next")
+    });
+
+    document.getElementById(this.pageSelector).addEventListener("change", (event) => {
+      this.showItems(event.target.value);
+    });
+
+    document.getElementById(this.perPageSelector).addEventListener("click", (event) => {
+      
+    });
+
+    document.getElementById(this.pageJumpBtn).addEventListener("click", () => {
+      this.pageJump();
+    });
   },
   showItems(num) {
     let itemHolder = document.getElementById(this.itemHolder);
@@ -46,6 +74,17 @@ JsPager.prototype = {
       itemHolder.appendChild(el2);
     });
   },
+  flip(direction) {
+    if (direction === "next") {
+      this.showItems(this.pg.next());
+    } else {
+      this.showItems(this.pg.prev());
+    }
+  },
+  pageJump() {
+    let page = document.getElementById(this.pageJumper).value;
+    this.showItems(page);
+  },
   setPageSelectorDropdown() {
     let pageSelector = document.getElementById(this.pageSelector);
     pageSelector.innerHTML = "";
@@ -57,7 +96,15 @@ JsPager.prototype = {
     }
   },
   setPerPageDropdown() {
+    let perPageSelector = document.getElementById(this.perPageSelector);
+    perPageSelector.innerHTML = "";
 
+    this.perPageItems.forEach(function(i, index, array) {
+      let el2 = document.createElement("option");
+      el2.textContent = i;
+      el2.value = i;
+      perPageSelector.appendChild(el2);
+    });
   }
 };
 

@@ -55,8 +55,10 @@ JsPager.prototype = {
       this.showItems(event.target.value);
     });
 
-    document.getElementById(this.perPageSelector).addEventListener("click", (event) => {
-
+    document.getElementById(this.perPageSelector).addEventListener("change", (event) => {
+      this.perPage = event.target.value;
+      this.activatePager();
+      this.showItems(1);
     });
 
     document.getElementById(this.pageJumpBtn).addEventListener("click", () => {

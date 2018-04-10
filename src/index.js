@@ -31,7 +31,6 @@ function JsPager(opts) {
 JsPager.prototype = {
   init: function () {
     this.activatePager(this.perPage);
-    this.showItems(this.pg.currentPage);
     this.setPerPageDropdown();
     this.addEvents();
   },
@@ -41,6 +40,7 @@ JsPager.prototype = {
       perPage: this.perPage,
       data: items
     });
+    this.showItems(1);
   },
   addEvents: function () {
     document.getElementById(this.btn_prev).addEventListener("click", () => {
@@ -56,9 +56,7 @@ JsPager.prototype = {
     });
 
     document.getElementById(this.perPageSelector).addEventListener("change", (event) => {
-      this.perPage = event.target.value;
-      this.activatePager();
-      this.showItems(1);
+      this.changePerPage(event.target.value);
     });
 
     document.getElementById(this.pageJumpBtn).addEventListener("click", () => {
@@ -94,6 +92,10 @@ JsPager.prototype = {
   pageJump() {
     let page = document.getElementById(this.pageJumper).value;
     this.showItems(page);
+  },
+  changePerPage(perPage) {
+    this.perPage = perPage;
+    this.activatePager();
   },
   setPageSelectorDropdown(page) {
     let pageSelector = document.getElementById(this.pageSelector);

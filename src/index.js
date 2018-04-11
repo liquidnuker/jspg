@@ -1,11 +1,12 @@
 import "./styles/main.scss";
 
 import Pager from "./js/pager.js";
+import {pageBtns} from "./js/pagebtns.js";
 
 // temp item data
 let items = [];
 let num = 0;
-for (let i = 0, l = 42; i < l; i++) {
+for (let i = 0, l = 162; i < l; i++) {
   num += 1;
   items.push(num);
 }
@@ -24,8 +25,9 @@ function JsPager(opts) {
   this.btn_next = opts.btn_next;
 
   this.pg = "";
-  this.perPage = 10;
+  this.perPage = 20;
   this.perPageItems = [10, 20, 50, 100];
+  // this.pageBtns = "";
 }
 
 JsPager.prototype = {
@@ -40,6 +42,7 @@ JsPager.prototype = {
       perPage: this.perPage,
       data: items
     });
+    this.setPageBtns();
     this.showItems(1);
   },
   addEvents: function () {
@@ -81,6 +84,7 @@ JsPager.prototype = {
     });
 
     this.setPageSelectorDropdown(this.pg.currentPage);
+    this.changePageBtns();    
   },
   flip(direction) {
     if (direction === "next") {
@@ -129,6 +133,16 @@ JsPager.prototype = {
       el2.value = i;
       perPageSelector.appendChild(el2);
     });
+  },
+  setPageBtns() {
+    this.temp = [];
+    // push page buttons to new array to prevent extra pages
+    for (let i = 0, l = this.pg.getTotalPages(); i < l; i++) {
+      this.temp.push(pageBtns(i, l));
+    }
+  },
+  changePageBtns() {
+    console.log("changePageBtns " + this.temp[this.pg.currentPage - 1]);
   }
 };
 

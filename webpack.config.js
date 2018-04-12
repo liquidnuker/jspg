@@ -58,8 +58,8 @@ module.exports = {
 				// path.join(__dirname, 'src/components/*.jsx')
 			]),
 			purifyOptions: {
-        whitelist: [ '*:not*' ]
-      },
+  	      whitelist: [ '*:not*', 'jspager_pagebtn'  ]
+  	    },
 			minimize: true
 		}),
 	],

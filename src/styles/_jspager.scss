@@ -1,5 +1,13 @@
 .jspager {
+
   .jspager_controls {
+    .jspager_pagebtn {
+      @extend %display--inline-block;
+      @extend %padd--4;
+      border: 1px solid #000;
+      cursor: pointer;    
+    }
+
     @extend %margin-top--4;
     background-color: #ccc;
 

@@ -15,6 +15,7 @@ function JsPager(opts) {
   this.itemHolder = opts.itemHolder;
   this.currentPageHolder = opts.currentPageHolder;
   this.totalPageHolder = opts.totalPageHolder;
+  this.pageBtnHolder = opts.pageBtnHolder;
 
   this.pageSelector = opts.pageSelector;
   this.perPageSelector = opts.perPageSelector;
@@ -25,7 +26,7 @@ function JsPager(opts) {
   this.btn_next = opts.btn_next;
 
   this.pg = "";
-  this.perPage = 20;
+  this.perPage = 10;
   this.perPageItems = [10, 20, 50, 100];
   // this.pageBtns = "";
 }
@@ -142,7 +143,31 @@ JsPager.prototype = {
     }
   },
   changePageBtns() {
-    console.log("changePageBtns " + this.temp[this.pg.currentPage - 1]);
+    let pageBtnHolder = document.getElementById(this.pageBtnHolder);
+    pageBtnHolder.innerHTML = "";
+
+    let buttonSet = this.temp[this.pg.currentPage - 1];
+    console.log(buttonSet);
+    
+    let el2;
+    buttonSet.forEach(function(i) {
+      el2 = document.createElement("a");
+      el2.className = "jspager_pagebtn";
+      el2.textContent = i;
+      el2.value = i;
+
+      // todo: set active
+      // if (i === this.pg.currentPage) {
+      //   // el2.active
+      // }
+
+      pageBtnHolder.appendChild(el2);
+    });
+
+
+  },
+  goToPage(num) {
+    console.log(num);
   }
 };
 
@@ -150,6 +175,7 @@ let jspg = new JsPager({
   itemHolder: "jspager_items",
   currentPageHolder: "jspager_currentpage",
   totalPageHolder: "jspager_totalpages",
+  pageBtnHolder: "jspager_pagebtnholder",
 
   pageSelector: "jspager_select",
   perPageSelector: "jspager_perpage",

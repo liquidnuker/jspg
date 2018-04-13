@@ -8,6 +8,11 @@
       cursor: pointer;    
     }
 
+    .jspager_pagebtn--active {
+      background-color: green;
+      color: #fff;
+    }
+
     @extend %margin-top--4;
     background-color: #ccc;
 

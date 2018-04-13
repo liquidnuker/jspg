@@ -51,17 +51,17 @@ module.exports = {
 	externals: {},
 	plugins: [
 		extractCSS,
-		new PurifyCSSPlugin({
-			// Give paths to parse for rules. These should be absolute!
-			paths: glob.sync([
-				path.join(__dirname, '*.html'),
-				// path.join(__dirname, 'src/components/*.jsx')
-			]),
-			purifyOptions: {
-  	      whitelist: [ '*:not*', 'jspager_pagebtn'  ]
-  	    },
-			minimize: true
-		}),
+		// new PurifyCSSPlugin({
+		// 	// Give paths to parse for rules. These should be absolute!
+		// 	paths: glob.sync([
+		// 		path.join(__dirname, '*.html'),
+		// 		// path.join(__dirname, 'src/components/*.jsx')
+		// 	]),
+		// 	purifyOptions: {
+  // 	      whitelist: [ '*:not*', 'jspager_pagebtn'  ]
+  // 	    },
+		// 	minimize: true
+		// }),
 	],
 	resolve: {
 		modules: [

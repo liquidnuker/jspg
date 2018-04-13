@@ -147,28 +147,28 @@ JsPager.prototype = {
     pageBtnHolder.innerHTML = "";
 
     let buttonSet = this.temp[this.pg.currentPage - 1];
-    console.log(buttonSet);
-    
     let el2;
-    buttonSet.forEach(function(i) {
+
+    console.log(this.pg.currentPage);
+
+    buttonSet.forEach((i) => {
       el2 = document.createElement("a");
+
       el2.className = "jspager_pagebtn";
       el2.textContent = i;
       el2.value = i;
 
-      // todo: set active
-      // if (i === this.pg.currentPage) {
-      //   // el2.active
-      // }
+      if (el2.value === this.pg.currentPage) {
+        el2.className += " jspager_pagebtn--active";
+      }
+
+      el2.addEventListener("click", (event) => {
+        this.showItems(event.target.value); 
+      });
 
       pageBtnHolder.appendChild(el2);
     });
-
-
   },
-  goToPage(num) {
-    console.log(num);
-  }
 };
 
 let jspg = new JsPager({

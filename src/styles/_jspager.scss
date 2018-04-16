@@ -1,9 +1,87 @@
-.jspager {
+// mobile portrait (320x480) 
+@include mq($from: mobile) {
+  .jspager {
+    .jspager_pagebtnholder {
+      a {
+        margin-top: 4px;
+      }
+    }
 
-  .jspager_controls {
-    .jspager_pagebtn {
+    .jspager_pagebtnholder,
+    .jspager_totalpagesholder,
+    .jspager_jumptopageholder,
+    .jspager_perpageholder,
+    .jspager_prevnextholder {
+      text-align: center;
+      margin-top: 4px;
+    }
+  }
+
+  .jspager_jump {
+    width: 20%;
+  }
+}
+
+// *small tablet portrait (600x800)
+@include mq($from: smallTabletPortrait) {
+  .jspager {
+    .jspager_pagebtnholder {
+      a {
+        margin-top: auto;
+      }
+    }
+
+    .jspager_pagebtnholder,
+    .jspager_totalpagesholder,
+    .jspager_jumptopageholder,
+    .jspager_perpageholder,
+    .jspager_prevnextholder {
+      text-align: left;
+      margin-top: auto;
+    }
+  }
+
+  .jspager_prevnextholder {
+    span {
+      display: none;
+    }
+  }
+
+  .jspager_jump {
+    width: 30%;
+  }
+}
+
+// *tablet landscape (1024x768)
+@include mq($from: tabletLandscape) {
+  .jspager {
+    .jspager_prevnextholder {
+      span {
+        display: inline-block;
+      }
+    }
+  } 
+}
+
+// end breakpoints 
+
+.jspager {
+  .jspager_pagebtnholder,
+    .jspager_totalpagesholder,
+    .jspager_jumptopageholder,
+    .jspager_perpageholder,
+    .jspager_prevnextholder {
+      @extend %padd--4;
+    }
+
+  .jspager_pagebtn {
+      @extend %mp--0;
+      @extend %btn_font--sans-serif;
       @extend %display--inline-block;
       @extend %padd--4;
+      font-size: 100%; 
+      line-height: 1.15;
+
       border: 1px solid #000;
       cursor: pointer;    
     }
@@ -14,13 +92,18 @@
     }
 
     @extend %margin-top--4;
-    background-color: #ccc;
+    // background-color: #ccc;
 
     p {
       @extend %display--inline-block;
       vertical-align: middle;
     }
-  }
+
+    a {
+      @extend %display--inline-block;
+      height: 30px;
+      vertical-align: middle;
+    }
 
   .btn {
     height: 30px;
@@ -34,7 +117,6 @@
     svg {
       @extend %display--inline-block;
       vertical-align: text-bottom;
-      width: 18px;
       height: 18px;
     }
   }
@@ -62,4 +144,5 @@
     border: 1px solid #000;
     background-color: #fff;
   }
+
 }

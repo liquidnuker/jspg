@@ -22,8 +22,10 @@ function JsPager(opts) {
   this.pageJumper = opts.pageJumper;
   this.pageJumpBtn = opts.pageJumpBtn;
 
+  this.btn_first = opts.btn_first;
   this.btn_prev = opts.btn_prev;
   this.btn_next = opts.btn_next;
+  this.btn_last = opts.btn_last;
 
   this.perPage = 10;
   this.perPageItems = [10, 20, 50, 100];
@@ -45,6 +47,14 @@ JsPager.prototype = {
     this.showItems(1);
   },
   addEvents: function () {
+    document.getElementById(this.btn_first).addEventListener("click", () => {
+      this.showItems(1);
+    });
+
+    document.getElementById(this.btn_last).addEventListener("click", () => {
+      this.showItems(this.pg.getTotalPages());
+    });
+
     document.getElementById(this.btn_prev).addEventListener("click", () => {
       this.flip();
     });
@@ -72,6 +82,9 @@ JsPager.prototype = {
     });
   },
   showItems(num) {
+    // total pages
+    document.getElementById(this.totalPageHolder).textContent = this.pg.getTotalPages();
+
     let itemHolder = document.getElementById(this.itemHolder);
     itemHolder.innerHTML = "";
 
@@ -177,8 +190,10 @@ let jspg = new JsPager({
   pageJumper: "jspager_jump",
   pageJumpBtn: "jspager_jumpbtn",
 
+  btn_first: "jspager_first",
   btn_prev: "jspager_prev",
   btn_next: "jspager_next",
+  btn_last: "jspager_last"
 });
 
 jspg.init();

@@ -28,7 +28,9 @@
   }
 
   .btn_prev,
-  .btn_next {
+  .btn_next,
+  .btn_first,
+  .btn_last {
     svg {
       @extend %display--inline-block;
       vertical-align: text-bottom;
@@ -37,13 +39,15 @@
     }
   }
 
-  .btn_prev {
+  .btn_prev,
+  .btn_first {
     svg {
       margin-left: -4px;
     }
   }
 
-  .btn_next {
+  .btn_next,
+  .btn_last {
     svg {
       margin-right: -4px;
     }

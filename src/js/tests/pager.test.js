@@ -29,15 +29,14 @@ test('page switcher should default on invalid page', () => {
   
   expect(pg.page(0)).toEqual(defaultPage);
   expect(pg.page(1)).toEqual(defaultPage);
-  expect(pg.page(9999)).toEqual(defaultPage);
+  expect(pg.page(pg.getTotalPages() + 1)).toEqual(defaultPage);
 
   expect(pg.page(2)).not.toEqual(defaultPage);
 });
 
 test('page switcher/offset', () => {
   expect(pg.page(1).length).toBeLessThanOrEqual(pg.perPage);
-  expect(999).not.toBeLessThanOrEqual(pg.perPage);
-
+  
   pg.perPage = 20;
   expect(pg.page(1).length).toBeLessThanOrEqual(pg.perPage);
   expect(999).not.toBeLessThanOrEqual(pg.perPage);
@@ -92,6 +91,6 @@ test('isValidPage', () => {
   expect(pg.isValidPage(1)).toBeTruthy();
   expect(pg.isValidPage(pg.getTotalPages())).toBeTruthy();
   
-  expect(pg.isValidPage(999)).toBeFalsy();
+  expect(pg.isValidPage(pg.getTotalPages() + 1)).toBeFalsy();
   expect(pg.isValidPage(0)).toBeFalsy();
 });

@@ -1,9 +1,9 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title></title>
+    <title>jsPager vanilla js paginator</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
@@ -13,10 +13,10 @@
   </head>
   <body>
     <!-- grid v2 -->
-    <div class="row jspager">
+    <nav class="row jspager">
       <!-- main item list -->
-      <div class="row">
-        <div id="jspager_items"></div>
+      <div id="jspager_items" class="row" 
+      aria-atomic="true" aria-live="assertive" aria-relevant="all">
       </div>
       <!-- /main item list  -->
       <div class="col-sm-8">
@@ -24,81 +24,82 @@
         <div class="row">
           <div class="col-md-3">
             <!-- page selector -->
-            <div class="jspager_totalpagesholder">
-              <p>Page:</p>
+            <aside class="jspager_totalpagesholder">
+              <label for="jspager_select">Page:</label>
               <p id="jspager_currentpage"></p>
-              <select id="jspager_select" class="jspager_select">
+              <select id="jspager_select" name="jspager_select" class="jspager_select" tabindex="0">
               </select>
               <p id="jspager_totalpages"></p>
-            </div>
+            </aside>
             <!-- /page selector -->
           </div>
           <div class="col-md-5">
             <!-- firstlast -->
-            <div class="row jspager_prevnextholder">
+            <aside class="jspager_prevnextholder">
               <!-- first -->
-              <button id="jspager_first" class="col-xs-3 btn btn1-01 btn_first">
+              <button id="jspager_first" class="btn btn1-01 btn_first" tabindex="0">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
               </svg>
               <span>First</span>
               </button>
               <!-- prev -->
-              <button id="jspager_prev" class="col-xs-3 btn btn1-01 btn_prev">
+              <button id="jspager_prev" class="btn btn1-01 btn_prev" tabindex="0">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
               </svg>
               <span>Prev</span>
               </button>
               <!-- next -->
-              <button id="jspager_next" class="col-xs-3 btn btn1-01 btn_next">
+              <button id="jspager_next" class="btn btn1-01 btn_next" tabindex="0">
               <span>Next</span>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
               </svg>
               </button>
               <!-- last -->
-              <button id="jspager_last" class="col-xs-3 btn btn1-01 btn_last">
+              <button id="jspager_last" class="btn btn1-01 btn_last" tabindex="0">
               <span>Last</span>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
               </svg>
               </button>
-            </div>
+            </aside>
             <!-- /firstlast -->
-            </div>
-            <div class="col-md-4">
-              <!-- page buttons -->
-              <div id="jspager_pagebtnholder" class="jspager_pagebtnholder">
-              </div>
-              <!-- /page buttons -->
-            </div>
           </div>
-        </div>
-        <div class="col-sm-4">
-          <!-- jump to page/perpage -->
-          <div class="row">
-            <div class="col-sm-6">
-              <!-- jump to page -->
-              <div class="jspager_jumptopageholder">
-                <p>jump to page:&nbsp;</p>
-                <input type="text" name="" id="jspager_jump" class=" jspager_jump" placeholder="" />
-                <button id="jspager_jumpbtn" class=" btn btn1-01">Go</button>
-              </div>
-              <!-- /jump to page -->
-            </div>
-            <div class="col-sm-6">
-              <!-- perpage -->
-              <div class="jspager_perpageholder">
-                <p>perPage:&nbsp;</p>
-                <select id="jspager_perpage" class="jspager_perpage">
-                </select>
-              </div>
-              <!-- /perpage -->
-            </div>
+          <div class="col-md-4">
+            <!-- page buttons -->
+            <aside id="jspager_pagebtnholder" class="jspager_pagebtnholder" 
+            aria-atomic="true" aria-live="polite" aria-relevant="additions">
+            </aside>
+            <!-- /page buttons -->
           </div>
         </div>
       </div>
-      <script src="dist/main.bundle.js"></script>
-    </body>
-  </html>
+      <div class="col-sm-4">
+        <!-- jump to page/perpage -->
+        <div class="row">
+          <div class="col-sm-6">
+            <!-- jump to page -->
+            <aside class="jspager_jumptopageholder">
+              <label for="jspager_jump">jump to page:&nbsp;</label>
+              <input type="text" name="jspager_jump" id="jspager_jump" class=" jspager_jump" placeholder="" tabindex="0" />
+              <button id="jspager_jumpbtn" class=" btn btn1-01" tabindex="0">Go</button>
+            </aside>
+            <!-- /jump to page -->
+          </div>
+          <div class="col-sm-6">
+            <!-- perpage -->
+            <aside class="jspager_perpageholder">
+              <label for="jspager_perpage">perPage:&nbsp;</label>
+              <select id="jspager_perpage" name="jspager_perpage" class="jspager_perpage" tabindex="0">
+              </select>
+            </aside>
+            <!-- /perpage -->
+          </div>
+        </div>
+      </div>
+    </nav>
+    <script src="dist/main.bundle.js"></script>
+  </body>
+</html>

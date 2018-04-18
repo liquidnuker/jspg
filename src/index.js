@@ -34,7 +34,11 @@ function JsPager(opts) {
 JsPager.prototype = {
   init: function () {
     this.activatePager(this.perPage);
-    this.setPerPageDropdown();
+
+    if (this.perPageSelector) {
+      this.setPerPageDropdown();
+    }
+
     this.addEvents();
   },
   activatePager: function () {
@@ -43,17 +47,22 @@ JsPager.prototype = {
       perPage: this.perPage,
       data: items
     });
+
     this.setPageBtns();
     this.showItems(1);
   },
   addEvents: function () {
-    document.getElementById(this.btn_first).addEventListener("click", () => {
-      this.showItems(1);
-    });
+    if (this.btn_first) {
+      document.getElementById(this.btn_first).addEventListener("click", () => {
+        this.showItems(1);
+      });
+    }
 
-    document.getElementById(this.btn_last).addEventListener("click", () => {
-      this.showItems(this.pg.getTotalPages());
-    });
+    if (this.btn_last) {
+      document.getElementById(this.btn_last).addEventListener("click", () => {
+        this.showItems(this.pg.getTotalPages());
+      });
+    }
 
     document.getElementById(this.btn_prev).addEventListener("click", () => {
       this.flip();
@@ -67,23 +76,29 @@ JsPager.prototype = {
       this.showItems(Number(event.target.value));
     });
 
+
     document.getElementById(this.perPageSelector).addEventListener("change", (event) => {
       this.changePerPage(event.target.value);
     });
 
-    document.getElementById(this.pageJumpBtn).addEventListener("click", () => {
-      this.pageJump();
-    });
 
-    document.getElementById(this.pageJumper).addEventListener("keypress", (e) => {
-      if (e.keyCode === 32 || e.keyCode === 13) {
+    if (this.pageJumpBtn && this.pageJumper) {
+      document.getElementById(this.pageJumpBtn).addEventListener("click", () => {
         this.pageJump();
-      }
-    });
+      });
+
+      document.getElementById(this.pageJumper).addEventListener("keypress", (e) => {
+        if (e.keyCode === 32 || e.keyCode === 13) {
+          this.pageJump();
+        }
+      });
+    }
   },
   showItems(num) {
     // total pages
-    document.getElementById(this.totalPageHolder).textContent = this.pg.getTotalPages();
+    if (this.totalPageHolder) {
+      document.getElementById(this.totalPageHolder).textContent = `of ${this.pg.getTotalPages()}`;
+    }
 
     let itemHolder = document.getElementById(this.itemHolder);
     itemHolder.innerHTML = "";
@@ -96,7 +111,11 @@ JsPager.prototype = {
     });
 
     this.setPageSelectorDropdown(this.pg.currentPage);
-    this.changePageBtns();
+
+    if (this.pageBtnHolder) {
+      this.changePageBtns();
+    }
+
   },
   flip(direction) {
     if (direction === "next") {
@@ -182,18 +201,19 @@ JsPager.prototype = {
 let jspg = new JsPager({
   itemHolder: "jspager_items",
   currentPageHolder: "jspager_currentpage",
-  totalPageHolder: "jspager_totalpages",
-  pageBtnHolder: "jspager_pagebtnholder",
+  totalPageHolder: "jspager_totalpages", // false
+  pageBtnHolder: "jspager_pagebtnholder", // false
 
   pageSelector: "jspager_select",
-  perPageSelector: "jspager_perpage",
-  pageJumper: "jspager_jump",
-  pageJumpBtn: "jspager_jumpbtn",
+  perPageSelector: "jspager_perpage", // false
+  pageJumper: "jspager_jump", // false
+  pageJumpBtn: "jspager_jumpbtn", // false
 
-  btn_first: "jspager_first",
+  btn_first: "jspager_first", // false
+  btn_last: "jspager_last", // false
   btn_prev: "jspager_prev",
   btn_next: "jspager_next",
-  btn_last: "jspager_last"
+
 });
 
 jspg.init();

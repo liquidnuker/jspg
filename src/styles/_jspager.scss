@@ -15,16 +15,29 @@
       text-align: center;
       margin-top: 4px;
     }
-  }
 
-  .jspager_jump {
-    width: 20%;
+    .jspager_prevnextholder {
+    .btn_prev,
+    .btn_next,
+    .btn_first,
+    .btn_last {
+        
+      }
+    }
+
+    .jspager_jumptopageholder {
+      width: auto;
+      .jspager_jump {
+        width: 20%;
+      }
+    }
   }
 }
 
 // *small tablet portrait (600x800)
 @include mq($from: smallTabletPortrait) {
   .jspager {
+    // width: 768px;    
     .jspager_pagebtnholder {
       a {
         margin-top: auto;
@@ -36,8 +49,14 @@
     .jspager_jumptopageholder,
     .jspager_perpageholder,
     .jspager_prevnextholder {
-      text-align: left;
+      display: inline-block;
+      float: left;
+      border: 1px solid #000;
       margin-top: auto;
+    }
+
+    .jspager_prevnextholder {
+      
     }
   }
 
@@ -45,6 +64,7 @@
     span {
       display: none;
     }
+
   }
 
   .jspager_jump {
@@ -114,6 +134,12 @@
   .btn_next,
   .btn_first,
   .btn_last {
+    
+    
+    span {
+      @extend %display--inline-block;
+    }
+
     svg {
       @extend %display--inline-block;
       vertical-align: text-bottom;
@@ -124,14 +150,15 @@
   .btn_prev,
   .btn_first {
     svg {
-      margin-left: -4px;
+      // display: inline-block;
+      // margin-left: 2px;
     }
   }
 
   .btn_next,
   .btn_last {
     svg {
-      margin-right: -4px;
+      // margin-right: -4px;
     }
   }
 

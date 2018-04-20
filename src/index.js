@@ -11,23 +11,23 @@ for (let i = 0, l = 162; i < l; i++) {
 
 const jspg = new JsPager({
   data: items,
-  itemHolder: "jspager_items",
-  currentPageHolder: "jspager_currentpage",
-  totalPageHolder: "jspager_totalpages", // false
-  pageBtnHolder: "jspager_pagebtnholder", // false
+  itemHolder: "jspager1_items",
+  currentPageHolder: "jspager1_currentpage",
+  totalPageHolder: "jspager1_totalpages", // false
+  pageBtnHolder: "jspager1_pagebtnholder", // false
 
-  pageSelector: "jspager_select",
-  perPageSelector: "jspager_perpage", // false
-  pageJumper: "jspager_jump", // false
-  pageJumpBtn: "jspager_jumpbtn", // false
+  pageSelector: "jspager1_select",
+  perPageSelector: "jspager1_perpage", // false
+  pageJumper: "jspager1_jump", // false
+  pageJumpBtn: "jspager1_jumpbtn", // false
 
-  pageBtnClass: "jspager_pagebtn",
-  pageBtnActiveClass: " jspager_pagebtn--active", // add space
+  pageBtnClass: "jspager1_pagebtn",
+  pageBtnActiveClass: " jspager1_pagebtn--active", // add space
 
-  btn_first: "jspager_first", // false
-  btn_last: "jspager_last", // false
-  btn_prev: "jspager_prev",
-  btn_next: "jspager_next",
+  btn_first: "jspager1_first", // false
+  btn_last: "jspager1_last", // false
+  btn_prev: "jspager1_prev",
+  btn_next: "jspager1_next",
 
 });
 

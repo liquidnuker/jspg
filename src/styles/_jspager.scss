@@ -71,6 +71,10 @@ body {
 // end breakpoints 
 
 @mixin jspager1_theme() {
+  .jspager1_items {
+    color: #fff;
+  }
+
   .jspager1 {
     background-color: #1c1d22;
     color: #d5d5d5;

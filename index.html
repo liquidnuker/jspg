@@ -12,6 +12,7 @@
     <link rel="icon" type="image/png" href="icon.png">
   </head>
   <body>
+    <!-- jspager1 -->
     <div class="jspager1_holder">
       <!-- main item list -->
       <div id="jspager1_items" class="row jspager1_items"
@@ -86,6 +87,76 @@
         <!-- /perpage -->
       </nav>
     </div>
+    <!-- /jspager1 -->
+    <br>
+    <br>
+    <!-- jspager2 -->
+    <div class="jspager2_holder">
+      <!-- main item list -->
+      <div id="jspager2_items" class="row jspager2_items"
+        aria-atomic="true" aria-live="assertive" aria-relevant="all">
+      </div>
+      <!-- /main item list  -->
+      <nav class="jspager2">
+        <!-- page selector/firstlast/page buttons -->
+        <!-- page selector -->
+        <aside class="jspager2_totalpagesholder">
+          <label for="jspager2_select">Page:</label>
+          <p id="jspager2_currentpage"></p>
+          <select id="jspager2_select" name="jspager2_select" class="jspager2_select" tabindex="0">
+          </select>
+          <p id="jspager2_totalpages"></p>
+        </aside>
+        <!-- /page selector -->
+        <!-- firstlast -->
+        <aside class="jspager2_prevnextholder">
+          <!-- first -->
+          <button id="jspager2_first" class="btn btn_first" tabindex="0">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+          </svg>
+          <span>First</span>
+          </button>
+          <!-- prev -->
+          <button id="jspager2_prev" class="btn btn_prev" tabindex="0">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+          </svg>
+          <span>Prev</span>
+          </button>
+          <!-- next -->
+          <button id="jspager2_next" class="btn btn_next" tabindex="0">
+          <span>Next</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+          </svg>
+          </button>
+          <!-- last -->
+          <button id="jspager2_last" class="btn btn_last" tabindex="0">
+          <span>Last</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+          </svg>
+          </button>
+        </aside>
+        <!-- /firstlast -->
+        
+        <!-- page buttons -->
+        <aside id="jspager2_pagebtnholder" class="jspager2_pagebtnholder"
+          aria-atomic="true" aria-live="polite" aria-relevant="additions">
+        </aside>
+        <!-- /page buttons -->
+        
+        <!-- perpage -->
+        <aside class="jspager2_perpageholder">
+          <label for="jspager2_perpage">perPage:&nbsp;</label>
+          <select id="jspager2_perpage" name="jspager2_perpage" class="jspager2_perpage" tabindex="0">
+          </select>
+        </aside>
+        <!-- /perpage -->
+      </nav>
+    </div>
+    <!-- /jspager2 -->
     <script src="dist/main.bundle.js"></script>
   </body>
 </html>

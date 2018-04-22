@@ -61,8 +61,7 @@ module.exports = {
   	      whitelist: [ 
   	      '*:not*', 
   	      // jspager dynamic classnames
-  	      'jspager_pagebtn',
-  	      'jspager_pagebtn--active'  ]
+  	      '*jspager*' ]
   	    },
 			minimize: true
 		}),

@@ -496,7 +496,6 @@ var jspg3 = new _jspager2.default({
 
   pageSelector: "jspager3_select",
   perPageSelector: "jspager3_perpage", // false
-  pageJumper: "jspager3_jump", // false
 
   pageBtnClass: "jspager3_pagebtn",
   pageBtnActiveClass: " jspager3_pagebtn--active", // add space
@@ -508,6 +507,30 @@ var jspg3 = new _jspager2.default({
 });
 
 jspg3.init();
+
+// jspager4
+// ======================================================/
+var item4 = items;
+
+var jspg4 = new _jspager2.default({
+  data: item3,
+  itemHolder: "jspager4_items",
+  currentPageHolder: "jspager4_currentpage",
+  totalPageHolder: "jspager4_totalpages", // false
+
+  pageSelector: "jspager4_select",
+  perPageSelector: "jspager4_perpage", // false
+
+  pageBtnClass: "jspager4_pagebtn",
+  pageBtnActiveClass: " jspager4_pagebtn--active", // add space
+
+  btn_first: "jspager4_first", // false
+  btn_last: "jspager4_last", // false
+  btn_prev: "jspager4_prev",
+  btn_next: "jspager4_next"
+});
+
+jspg4.init();
 
 /***/ }),
 /* 25 */

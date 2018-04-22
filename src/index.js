@@ -59,3 +59,29 @@ const jspg2 = new JsPager({
 });
 
 jspg2.init();
+
+// jspager3
+// ======================================================/
+const item3 = items;
+
+const jspg3 = new JsPager({
+  data: item3,
+  itemHolder: "jspager3_items",
+  currentPageHolder: "jspager3_currentpage",
+  totalPageHolder: "jspager3_totalpages", // false
+  pageBtnHolder: "jspager3_pagebtnholder", // false
+
+  pageSelector: "jspager3_select",
+  perPageSelector: "jspager3_perpage", // false
+  pageJumper: "jspager3_jump", // false
+  
+  pageBtnClass: "jspager3_pagebtn",
+  pageBtnActiveClass: " jspager3_pagebtn--active", // add space
+
+  btn_first: "jspager3_first", // false
+  btn_last: "jspager3_last", // false
+  btn_prev: "jspager3_prev",
+  btn_next: "jspager3_next",
+});
+
+jspg3.init();

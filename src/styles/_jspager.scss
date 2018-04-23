@@ -219,7 +219,6 @@ body {
     width: 100%;
     .jspager2_pagebtnholder,
     .jspager2_totalpagesholder,
-    .jspager2_jumptopageholder,
     .jspager2_perpageholder,
     .jspager2_prevnextholder {
       text-align: center;
@@ -250,7 +249,6 @@ body {
     width: auto;
     .jspager2_pagebtnholder,
     .jspager2_totalpagesholder,
-    .jspager2_jumptopageholder,
     .jspager2_perpageholder,
     .jspager2_prevnextholder {
       float: left;
@@ -336,7 +334,6 @@ body {
 .jspager2 {
     .jspager2_pagebtnholder,
     .jspager2_totalpagesholder,
-    .jspager2_jumptopageholder,
     .jspager2_perpageholder,
     .jspager2_prevnextholder {
       @extend %padd--4;
@@ -413,7 +410,6 @@ body {
     width: 100%;
     .jspager3_pagebtnholder,
     .jspager3_totalpagesholder,
-    .jspager3_jumptopageholder,
     .jspager3_perpageholder,
     .jspager3_prevnextholder {
       text-align: center;
@@ -444,7 +440,6 @@ body {
     width: auto;
     .jspager3_pagebtnholder,
     .jspager3_totalpagesholder,
-    .jspager3_jumptopageholder,
     .jspager3_perpageholder,
     .jspager3_prevnextholder {
       float: left;
@@ -530,7 +525,6 @@ body {
 .jspager3 {
     .jspager3_pagebtnholder,
     .jspager3_totalpagesholder,
-    .jspager3_jumptopageholder,
     .jspager3_perpageholder,
     .jspager3_prevnextholder {
       @extend %padd--4;

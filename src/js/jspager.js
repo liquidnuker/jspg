@@ -1,5 +1,8 @@
 import Pager from "./pager.js";
-import {pageBtns} from "./pagebtns.js";
+import {
+  pageBtns
+}
+from "./pagebtns.js";
 
 export default function JsPager(opts) {
   this.data = opts.data;
@@ -45,48 +48,91 @@ JsPager.prototype = {
     this.setPageBtns();
     this.showItems(1);
   },
+  getId: function (id) {
+    return document.getElementById(id);
+  },
+  generateListener: function (id, actions) {
+    // for optional items
+    if (id !== undefined) {
+      actions.forEach((i) => {
+        this.getId(id).addEventListener(i.ev, (event) => {
+          return i.exec(event);
+        });
+      });
+    }
+  },
   addEvents: function () {
-    if (this.btn_first) {
-      document.getElementById(this.btn_first).addEventListener("click", () => {
-        this.showItems(1);
-      });
-    }
+    let items = [{
+      id: this.btn_first,
+      actions: [{
+        ev: "click",
+        exec: () => {
+          this.showItems(1)
+        },
+      }]
+    }, {
+      id: this.btn_last,
+      actions: [{
+        ev: "click",
+        exec: () => {
+          this.showItems(this.pg.getTotalPages());
+        },
+      }]
+    }, {
+      id: this.btn_prev,
+      actions: [{
+        ev: "click",
+        exec: () => {
+          this.flip();
+        },
+      }]
+    }, {
+      id: this.btn_next,
+      actions: [{
+        ev: "click",
+        exec: () => {
+          this.flip("next");
+        },
+      }]
+    }, {
+      id: this.pageSelector,
+      actions: [{
+        ev: "change",
+        exec: (event) => {
+          this.showItems(Number(event.target.value));
+        },
+      }]
+    }, {
+      id: this.perPageSelector,
+      actions: [{
+        ev: "change",
+        exec: (event) => {
+          this.changePerPage(event.target.value);
+        },
+      }]
+    }, {
+      id: this.pageJumper,
+      actions: [{
+        ev: "keypress",
+        exec: (event) => {
+          if (event.keyCode === 32 || event.keyCode === 13) {
+            this.showItems(Number(event.target.value));
+          }
+        },
+      }]
+    }, {
+      id: this.pageJumpBtn,
+      actions: [{
+        ev: "click",
+        exec: () => {
+          this.showItems(Number(this.getId(this.pageJumper).value));
+        },
+      }]
+    }];
 
-    if (this.btn_last) {
-      document.getElementById(this.btn_last).addEventListener("click", () => {
-        this.showItems(this.pg.getTotalPages());
-      });
-    }
-
-    document.getElementById(this.btn_prev).addEventListener("click", () => {
-      this.flip();
+    items.forEach((i) => {
+      this.generateListener(i.id, i.actions);
     });
-
-    document.getElementById(this.btn_next).addEventListener("click", () => {
-      this.flip("next");
-    });
-
-    document.getElementById(this.pageSelector).addEventListener("change", (event) => {
-      this.showItems(Number(event.target.value));
-    });
-
-
-    document.getElementById(this.perPageSelector).addEventListener("change", (event) => {
-      this.changePerPage(event.target.value);
-    });
-
-
-    if (this.pageJumpBtn && this.pageJumper) {
-      document.getElementById(this.pageJumpBtn).addEventListener("click", () => {
-        this.pageJump();
-      });
-
-      document.getElementById(this.pageJumper).addEventListener("keypress", (e) => {
-        if (e.keyCode === 32 || e.keyCode === 13) {
-          this.pageJump();
-        }
-      });
-    }
   },
   showItems(num) {
     // total pages
@@ -98,7 +144,7 @@ JsPager.prototype = {
     itemHolder.innerHTML = "";
     itemHolder.setAttribute("aria-setsize", this.data.length);
 
-    this.pg.page(num).forEach(function (i, index) {
+    this.pg.page(num).forEach((i, index) => {
       let el2 = document.createElement("span");
       el2.textContent = i + " ";
       el2.value = i;
@@ -118,10 +164,6 @@ JsPager.prototype = {
     } else {
       this.showItems(this.pg.prev());
     }
-  },
-  pageJump() {
-    let page = Number(document.getElementById(this.pageJumper).value);
-    this.showItems(page);
   },
   changePerPage(perPage) {
     this.perPage = perPage;

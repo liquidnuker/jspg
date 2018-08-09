@@ -1,8 +1,5 @@
 import Pager from "./pager.js";
-import {
-  pageBtns
-}
-from "./pagebtns.js";
+import {pageBtns} from "./pagebtns.js";
 
 export default function JsPager(opts) {
   this.data = opts.data;
@@ -67,7 +64,7 @@ JsPager.prototype = {
       actions: [{
         ev: "click",
         exec: () => {
-          this.showItems(1)
+          this.showItems(1);
         },
       }]
     }, {
@@ -145,10 +142,12 @@ JsPager.prototype = {
     itemHolder.setAttribute("aria-setsize", this.data.length);
 
     this.pg.page(num).forEach((i, index) => {
-      let el2 = document.createElement("span");
-      el2.textContent = i + " ";
-      el2.value = i;
-      el2.setAttribute("aria-posinset", index + 1);
+      let el2 = this.generateElement("span", {
+        textContent: i + " ",
+        value: i,
+        posinset: index + 1
+      });
+
       itemHolder.appendChild(el2);
     });
 
@@ -184,21 +183,40 @@ JsPager.prototype = {
     optsArr[page].selected = true;
 
     for (let i = 1, l = this.pg.getTotalPages() + 1; i < l; i++) {
-      let el2 = document.createElement("option");
-      el2.textContent = optsArr[i].value;
-      el2.value = optsArr[i].value;
+      let el2 = this.generateElement("option", {
+        textContent: optsArr[i].value,
+        value: optsArr[i].value
+      });
+
       el2.selected = optsArr[i].selected;
       pageSelector.appendChild(el2);
     }
+  },
+  generateElement(el, attr) {
+    let setvalue = (attr) => {
+      if (attr === undefined) {
+        return "";
+      }
+      return attr;
+    };
+
+    el = document.createElement(el);
+    el.textContent = attr.textContent;
+    el.value = attr.value;
+    el.setAttribute("tabindex", setvalue(attr.tabindex));
+    el.setAttribute("aria-posinset", setvalue(attr.posinset));
+    return el;
   },
   setPerPageDropdown() {
     let perPageSelector = this.getId(this.perPageSelector);
     perPageSelector.innerHTML = "";
 
-    this.perPageItems.forEach(function (i) {
-      let el2 = document.createElement("option");
-      el2.textContent = i;
-      el2.value = i;
+    this.perPageItems.forEach((i) => {
+      let el2 = this.generateElement("option", {
+        textContent: i,
+        value: i
+      });
+
       perPageSelector.appendChild(el2);
     });
   },
@@ -214,30 +232,36 @@ JsPager.prototype = {
     pageBtnHolder.innerHTML = "";
 
     let buttonSet = this.temp[this.pg.currentPage - 1];
-    let el2;
     buttonSet.forEach((i, index) => {
-      el2 = document.createElement("a");
 
-      el2.className = this.pageBtnClass;
-      el2.textContent = i;
-      el2.value = i;
-      el2.setAttribute("tabindex", 0);
-      el2.setAttribute("aria-posinset", index + 1);
+      let el2 = this.generateElement("a", {
+        textContent: i,
+        value: i,
+        tabindex: 0,
+        posinset: index + 1
+      });
+
+      if (el2.value === "...") {
+        el2.className = "dotsclass";
+      } else {
+        el2.className = this.pageBtnClass;
+
+        // placed here to remove click events on dots 
+        el2.addEventListener("click", (e) => {
+          this.showItems(e.target.value);
+        });
+
+        el2.addEventListener("keypress", (e) => {
+          if (e.keyCode === 32 || e.keyCode === 13) {
+            this.showItems(e.target.value);
+          }
+        });
+      }
 
       if (el2.value === this.pg.currentPage) {
         el2.className += this.pageBtnActiveClass;
         el2.setAttribute("aria-selected", true);
       }
-
-      el2.addEventListener("click", (e) => {
-        this.showItems(e.target.value);
-      });
-
-      el2.addEventListener("keypress", (e) => {
-        if (e.keyCode === 32 || e.keyCode === 13) {
-          this.showItems(e.target.value);
-        }
-      });
 
       pageBtnHolder.setAttribute("aria-setsize", buttonSet.length);
       pageBtnHolder.appendChild(el2);

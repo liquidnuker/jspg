@@ -137,10 +137,10 @@ JsPager.prototype = {
   showItems(num) {
     // total pages
     if (this.totalPageHolder) {
-      document.getElementById(this.totalPageHolder).textContent = `of ${this.pg.getTotalPages()}`;
+      this.getId(this.totalPageHolder).textContent = `of ${this.pg.getTotalPages()}`;
     }
 
-    let itemHolder = document.getElementById(this.itemHolder);
+    let itemHolder = this.getId(this.itemHolder);
     itemHolder.innerHTML = "";
     itemHolder.setAttribute("aria-setsize", this.data.length);
 
@@ -170,7 +170,7 @@ JsPager.prototype = {
     this.activatePager();
   },
   setPageSelectorDropdown(page) {
-    let pageSelector = document.getElementById(this.pageSelector);
+    let pageSelector = this.getId(this.pageSelector);
     pageSelector.innerHTML = "";
 
     let optsArr = [];
@@ -192,7 +192,7 @@ JsPager.prototype = {
     }
   },
   setPerPageDropdown() {
-    let perPageSelector = document.getElementById(this.perPageSelector);
+    let perPageSelector = this.getId(this.perPageSelector);
     perPageSelector.innerHTML = "";
 
     this.perPageItems.forEach(function (i) {
@@ -210,7 +210,7 @@ JsPager.prototype = {
     }
   },
   changePageBtns() {
-    let pageBtnHolder = document.getElementById(this.pageBtnHolder);
+    let pageBtnHolder = this.getId(this.pageBtnHolder);
     pageBtnHolder.innerHTML = "";
 
     let buttonSet = this.temp[this.pg.currentPage - 1];

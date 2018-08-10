@@ -1,5 +1,8 @@
 import Pager from "./pager.js";
-import {pageBtns} from "./pagebtns.js";
+import {
+  pageBtns
+}
+from "./pagebtns.js";
 
 export default function JsPager(opts) {
   this.data = opts.data;
@@ -142,10 +145,9 @@ JsPager.prototype = {
     itemHolder.setAttribute("aria-setsize", this.data.length);
 
     this.pg.page(num).forEach((i, index) => {
-      let el2 = this.generateElement("span", {
-        textContent: i + " ",
-        value: i,
-        posinset: index + 1
+      // el, textContent, value, attr
+      let el2 = this.generateElement("span", i + " ", i, {
+        "aria-posinset": index + 1,
       });
 
       itemHolder.appendChild(el2);
@@ -183,28 +185,32 @@ JsPager.prototype = {
     optsArr[page].selected = true;
 
     for (let i = 1, l = this.pg.getTotalPages() + 1; i < l; i++) {
-      let el2 = this.generateElement("option", {
-        textContent: optsArr[i].value,
-        value: optsArr[i].value
-      });
+      let el2 = this.generateElement("option",
+        optsArr[i].value,
+        optsArr[i].value
+      );
 
       el2.selected = optsArr[i].selected;
       pageSelector.appendChild(el2);
     }
   },
-  generateElement(el, attr) {
-    let setvalue = (attr) => {
-      if (attr === undefined) {
-        return "";
+  generateElement(el, textContent, value, attr) {
+    let getKeys = (obj) => {
+      let keys = [];
+      for (let i in obj) {
+        keys.push(i);
       }
-      return attr;
+      return keys;
     };
 
     el = document.createElement(el);
-    el.textContent = attr.textContent;
-    el.value = attr.value;
-    el.setAttribute("tabindex", setvalue(attr.tabindex));
-    el.setAttribute("aria-posinset", setvalue(attr.posinset));
+    el.textContent = textContent;
+    el.value = value;
+
+    getKeys(attr).forEach((i) => {
+      return el.setAttribute(i, attr[i]);
+    });
+
     return el;
   },
   setPerPageDropdown() {
@@ -212,11 +218,7 @@ JsPager.prototype = {
     perPageSelector.innerHTML = "";
 
     this.perPageItems.forEach((i) => {
-      let el2 = this.generateElement("option", {
-        textContent: i,
-        value: i
-      });
-
+      let el2 = this.generateElement("option", i, i);
       perPageSelector.appendChild(el2);
     });
   },
@@ -234,11 +236,9 @@ JsPager.prototype = {
     let buttonSet = this.temp[this.pg.currentPage - 1];
     buttonSet.forEach((i, index) => {
 
-      let el2 = this.generateElement("a", {
-        textContent: i,
-        value: i,
-        tabindex: 0,
-        posinset: index + 1
+      let el2 = this.generateElement("a", i, i, {
+        "tabindex": 0,
+        "aria-posinset": index + 1
       });
 
       if (el2.value === "...") {

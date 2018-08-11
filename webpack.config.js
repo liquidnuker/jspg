@@ -73,7 +73,8 @@ module.exports = {
 	],
 	resolve: {
 		modules: [
-			'../node_modules',
+			// '../node_modules',
+      'C:/xampp/htdocs/node_dev/node_modules'
 		]
 	}
 };

@@ -24,7 +24,8 @@ const jspg = new JsPager({
   pageJumpBtn: "jspager1_jumpbtn", // optional
 
   pageBtnClass: "jspager1_pagebtn",
-  pageBtnActiveClass: " jspager1_pagebtn--active", // add space
+  pageBtnActiveClass: "jspager1_pagebtn--active", 
+  pageBtnDotsClass: "jspager1_pagebtn_dots",
 
   btn_first: "jspager1_first", // optional
   btn_last: "jspager1_last", // optional
@@ -49,7 +50,8 @@ const jspg2 = new JsPager({
   perPageSelector: "jspager2_perpage", // optional
 
   pageBtnClass: "jspager2_pagebtn",
-  pageBtnActiveClass: " jspager2_pagebtn--active", // add space
+  pageBtnActiveClass: "jspager2_pagebtn--active", 
+  pageBtnDotsClass: "jspager2_pagebtn_dots",
 
   btn_first: "jspager2_first", // optional
   btn_last: "jspager2_last", // optional
@@ -74,7 +76,8 @@ const jspg3 = new JsPager({
   perPageSelector: "jspager3_perpage", // optional
 
   pageBtnClass: "jspager3_pagebtn",
-  pageBtnActiveClass: " jspager3_pagebtn--active", // add space
+  pageBtnActiveClass: "jspager3_pagebtn--active", 
+  pageBtnDotsClass: "jspager3_pagebtn_dots",
 
   btn_first: "jspager3_first", // optional
   btn_last: "jspager3_last", // optional
@@ -120,7 +123,8 @@ const jspg5 = new JsPager({
   perPageSelector: "jspager5_perpage", // optional
 
   pageBtnClass: "jspager5_pagebtn",
-  pageBtnActiveClass: " jspager5_pagebtn--active", // add space
+  pageBtnActiveClass: "jspager5_pagebtn--active", 
+  pageBtnDotsClass: "jspager5_pagebtn_dots",
 
   btn_first: "jspager5_first", // optional
   btn_last: "jspager5_last", // optional

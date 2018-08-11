@@ -18,6 +18,7 @@ export default function JsPager(opts) {
 
   this.pageBtnClass = opts.pageBtnClass;
   this.pageBtnActiveClass = opts.pageBtnActiveClass;
+  this.pageBtnDotsClass = opts.pageBtnDotsClass;
 
   this.btn_first = opts.btn_first;
   this.btn_prev = opts.btn_prev;
@@ -242,7 +243,7 @@ JsPager.prototype = {
       });
 
       if (el2.value === "...") {
-        el2.className = "dotsclass";
+        el2.className = this.pageBtnDotsClass;
       } else {
         el2.className = this.pageBtnClass;
 
@@ -259,7 +260,7 @@ JsPager.prototype = {
       }
 
       if (el2.value === this.pg.currentPage) {
-        el2.className += this.pageBtnActiveClass;
+        el2.className = `${this.pageBtnClass} ${this.pageBtnActiveClass}`;
         el2.setAttribute("aria-selected", true);
       }
 

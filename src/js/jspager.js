@@ -56,84 +56,55 @@ JsPager.prototype = {
     // for optional items
     if (id !== undefined) {
       actions.forEach((i) => {
-        this.getId(id).addEventListener(i.ev, (event) => {
-          return i.exec(event);
-        });
+        this.getId(id).addEventListener(i.ev, (event) => i.exec(event));
       });
     }
   },
   addEvents: function () {
-    let items = [{
-      id: this.btn_first,
-      actions: [{
-        ev: "click",
-        exec: () => {
-          this.showItems(1);
-        },
-      }]
-    }, {
-      id: this.btn_last,
-      actions: [{
-        ev: "click",
-        exec: () => {
-          this.showItems(this.pg.getTotalPages());
-        },
-      }]
-    }, {
-      id: this.btn_prev,
-      actions: [{
-        ev: "click",
-        exec: () => {
-          this.flip();
-        },
-      }]
-    }, {
-      id: this.btn_next,
-      actions: [{
-        ev: "click",
-        exec: () => {
-          this.flip("next");
-        },
-      }]
-    }, {
-      id: this.pageSelector,
-      actions: [{
-        ev: "change",
-        exec: (event) => {
-          this.showItems(Number(event.target.value));
-        },
-      }]
-    }, {
-      id: this.perPageSelector,
-      actions: [{
-        ev: "change",
-        exec: (event) => {
-          this.changePerPage(event.target.value);
-        },
-      }]
-    }, {
-      id: this.pageJumper,
-      actions: [{
-        ev: "keypress",
-        exec: (event) => {
-          if (event.keyCode === 32 || event.keyCode === 13) {
-            this.showItems(Number(event.target.value));
-          }
-        },
-      }]
-    }, {
-      id: this.pageJumpBtn,
-      actions: [{
-        ev: "click",
-        exec: () => {
-          this.showItems(Number(this.getId(this.pageJumper).value));
-        },
-      }]
-    }];
+    this.generateListener(this.btn_first, [{
+      ev: "click",
+      exec: () => this.showItems(1)
+    }]);
 
-    items.forEach((i) => {
-      this.generateListener(i.id, i.actions);
-    });
+    this.generateListener(this.btn_last, [{
+      ev: "click",
+      exec: () => this.showItems(this.pg.getTotalPages())
+    }]);
+
+    this.generateListener(this.btn_prev, [{
+      ev: "click",
+      exec: () => this.flip()
+    }]);
+
+    this.generateListener(this.btn_next, [{
+      ev: "click",
+      exec: () => this.flip("next")
+    }]);
+
+    this.generateListener(this.pageSelector, [{
+      ev: "change",
+      exec: (event) => this.showItems(Number(event.target.value))
+    }]);
+
+    this.generateListener(this.perPageSelector, [{
+      ev: "change",
+      exec: (event) => this.changePerPage(event.target.value)
+    }]);
+
+    this.generateListener(this.pageJumper, [{
+      ev: "keypress",
+      exec: (event) => {
+        if (event.keyCode === 32 || event.keyCode === 13) {
+          this.showItems(Number(event.target.value));
+        }
+      }
+    }]);
+
+    this.generateListener(this.pageJumpBtn, [{
+      ev: "click",
+      exec: () => this.showItems(Number(this.getId(this.pageJumper).value))
+    }]);
+
   },
   showItems(num) {
     // total pages
